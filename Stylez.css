@@ -77,7 +77,8 @@ ul{
     font-size: 200px;
     text-align: center;
     height: 220px;
-    z-index: 1000
+    z-index: 1000;
+    font-family: 'Overpass', sans-serif;
 }
 
 #inputbox {
