@@ -53,6 +53,9 @@
     margin-top: 4px;
     padding: 5px 2px 0px 10px;
     color: white;
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
 }
 ul{
     list-style-type: none;
@@ -71,7 +74,6 @@ ul{
     margin-top: -80px;
     z-index: 3;
     position: relative;
-
 }
 #face{
     font-size: 200px;
@@ -80,7 +82,15 @@ ul{
     z-index: 1000;
     font-family: 'Overpass', sans-serif;
 }
-
+#IdleDots{
+    font-size: 240px;
+    color: black;
+    position: relative;
+    font-family: 'Overpass', sans-serif;
+    margin-left: 52%;
+    margin-top: -240px;
+    letter-spacing: -19px;
+}
 #inputbox {
     background-color: grey;
     width: 30%;
