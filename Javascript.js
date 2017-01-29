@@ -7,6 +7,7 @@ var initial = true;
 var name = null;
 var blinkInterval = null;
 var talkinnterval = null;
+var idleTime = 0;
 
 function blinking() {
 
@@ -71,6 +72,7 @@ function bot(){
 
     $('#button').click(function(){
 
+        idleTime = 0;
         var INPUT = null;
         var INPUT = $('#input').val();
         var input = INPUT.toLowerCase();
@@ -163,8 +165,24 @@ function bot(){
 
     })
 }
+
+function idle(){
+    var idleInterval = setInterval(timerIncrement, 1000);
+    var conversationStarters = ["So... Have you read anything good recently?", "Do you believe in love at first sight?", "If you had to give yourself a new name, what name would you pick?", "What is one weird thing about you?"];
+
+    function timerIncrement() {
+        idleTime = idleTime + 1;
+        if (idleTime > 29) { // 30 seconds
+            var output1 = conversationStarters[Math.floor((Math.random() * conversationStarters.length))];
+            $('#textLogLeft').prepend("<div class='bubble'><p id='left'>"+output1+"</p></div>");
+            $('#textLogRight').prepend("<div class='invisbubble'><p id='right'>"+output1+"</p></div>")
+            idleTime = 0;
+        }
+    }
+};
 $(document).ready(function(){
     button();
+    idle();
     blinking();
     bot();
 });
