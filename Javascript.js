@@ -8,6 +8,7 @@ var name = null;
 var blinkInterval = null;
 var talkinnterval = null;
 var idleTime = 0;
+lastresponse = "poop";
 
 function blinking() {
 
@@ -51,6 +52,8 @@ function button(){
     })
 };
 function idle(){
+    var thing = lastresponse;
+    console.log(thing);
     var idleInterval = setInterval(timerIncrement, 1000);
     var conversationStarters = ["So... Have you read anything good recently?", "Do you believe in love at first sight?",
         "If you had to give yourself a new name, what name would you pick?",
@@ -64,34 +67,37 @@ function idle(){
     ];
 
     function timerIncrement() {
-        if (idleTime == 0) {$('#IdleDots').remove()}
-        idleTime = idleTime + 1;
-        if (idleTime == 28){
-            $('#IdleDots').remove();
-            $('#dotslist').append('<p id="IdleDots">.</p>');
-        }
-        if (idleTime == 30){
-            $('#IdleDots').remove();
-            $('#dotslist').append('<p id="IdleDots">. .</p>');
-        }
-        if (idleTime == 32){
-            $('#IdleDots').remove();
-            $('#dotslist').append('<p id="IdleDots">. . .</p>');
-        }
-        else if (idleTime == 35) { // 35 seconds
-            var output1 = conversationStarters[Math.floor((Math.random() * conversationStarters.length))];
-            clearInterval(blinkInterval);
-            talking();
-            $('#textLogLeft').prepend("<div class='bubble'><p id='left'>"+output1+"</p></div>");
-            $('#textLogRight').prepend("<div class='invisbubble'><p id='right'>"+output1+"</p></div>");
-            clearInterval(talkinnterval);
-            blinking();
-            lastresponse = "idleQuestion";
-            $('#IdleDots').remove();
-            idleTime = 0;
+        if (lastresponse != "idleQuestion"){
+            if (idleTime == 0) {$('#IdleDots').remove()}
+            idleTime = idleTime + 1;
+            if (idleTime == 24){
+                $('#IdleDots').remove();
+                $('#dotslist').append('<p id="IdleDots">.</p>');
+            }
+            if (idleTime == 26){
+                $('#IdleDots').remove();
+                $('#dotslist').append('<p id="IdleDots">. .</p>');
+            }
+            if (idleTime == 28){
+                $('#IdleDots').remove();
+                $('#dotslist').append('<p id="IdleDots">. . .</p>');
+            }
+            else if (idleTime == 30) { // 35 seconds
+                var output1 = conversationStarters[Math.floor((Math.random() * conversationStarters.length))];
+                clearInterval(blinkInterval);
+                talking();
+                $('#textLogLeft').prepend("<div class='bubble'><p id='left'>"+output1+"</p></div>");
+                $('#textLogRight').prepend("<div class='invisbubble'><p id='right'>"+output1+"</p></div>");
+                clearInterval(talkinnterval);
+                blinking();
+                lastresponse = "idleQuestion";
+                $('#IdleDots').remove();
+                idleTime = 0;
+            }
         }
     }
-};
+}
+
 function bot(){
 
     $("#input").keyup(function(event){
@@ -123,7 +129,7 @@ function bot(){
         /* ^^ appends what you type to the log ^^ */
 
         /* vv Decides what bot should say */
-        if (input == 'hello' || input =='greetings' || input=='hey' || input=='wazzup'){
+        if (input == 'hello' || input =='greetings' || input=='hey' || input=='wazzup' || input == 'hi'){
             lastresponse = "";
             var outputs = ['Hello','ayyyyy','greetings','greetings human!'];
             var output = outputs[Math.floor((Math.random() * 3))];
@@ -171,7 +177,6 @@ function bot(){
                 /*vvv makes the bot go back to blinking state  vvv*/
                 clearInterval(talkinnterval);
                 blinking();
-                lastresponse = "what's up";
             },Math.floor(Math.random()*(4000-1500+1)+1500))}
 
         else if (input=="what is the weather like?" || input=="how's the weather?" || input=="what is the weather?" || input=="whats the weather?" || input=="what's the weather?" || input=="how is the weather?" || input == "what's the weather like"){
@@ -190,6 +195,22 @@ function bot(){
                 blinking();
             },Math.floor(Math.random()*(4000-1500+1)+1500))}
 
+        else if (input == "what are you?"||input== "who are you?"){
+            lastresponse = "what are you";
+            var outputs = ["I am a pretty good chatbot in making! What are you?"];
+            var output = outputs[Math.floor((Math.random() * outputs.length))];
+            /*vvv decides what the bot should look like when talking  vvv*/
+            clearInterval(blinkInterval);
+            talking();
+            /*vvv creates the little bubbles of text  vvv*/
+            setTimeout(function(){
+                $('#textLogLeft').prepend("<div class='bubble'><p id='left'>"+output+"</p></div>");
+                $('#textLogRight').prepend("<div class='invisbubble'><p id='right'>"+output+"</p></div>");
+                /*vvv makes the bot go back to blinking state  vvv*/
+                clearInterval(talkinnterval);
+                blinking();
+                /*make this the last response */
+            },Math.floor(Math.random()*(4000-1500+1)+1500));}
          /* response if he doesn't know the question */
         else if (input.slice(-1) == '?'){
             var outputs = ["I don't know...", "I don't understand the question", "I'm not sure", "i don't know about that", "My master said I cannot answer this question"];
@@ -205,7 +226,6 @@ function bot(){
                 clearInterval(talkinnterval);
                 blinking();
             },Math.floor(Math.random()*(4000-1500+1)+1500))}
-
 
         else{
             clearInterval(talkinnterval);
@@ -231,7 +251,7 @@ function bot(){
                 lastresponse = "";
             },Math.floor(Math.random()*(4000-1500+1)+1500));}
 
-        else if (lastresponse == "what's up"){
+        else if (lastresponse == "what's up" || lastresponse == "what are you?"){
             var outputs = ["that's good to hear","really? that sounds cool!", "oh, tell me more.","can you elaborate"];
             var output = outputs[Math.floor((Math.random() * outputs.length))];
             /*vvv decides what the bot should look like when talking  vvv*/

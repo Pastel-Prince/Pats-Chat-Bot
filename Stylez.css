@@ -81,6 +81,7 @@ ul{
     height: 220px;
     z-index: 1000;
     font-family: 'Overpass', sans-serif;
+    position: relative;
 }
 #IdleDots{
     font-size: 240px;
