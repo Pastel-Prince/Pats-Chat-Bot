@@ -9,6 +9,7 @@ var talkinnterval = null;
 var idleTime = 0;
 lastresponse = "poop";
 
+
 function blinking() {
 
     function blink() {
@@ -52,7 +53,6 @@ function button() {
 
 function idle() {
     var thing = lastresponse;
-    console.log(thing);
     var idleInterval = setInterval(timerIncrement, 1000);
     var conversationStarters = ["So... Have you read anything good recently?", "Do you believe in love at first sight?",
         "If you had to give yourself a new name, what name would you pick?",
@@ -161,8 +161,7 @@ function bot() {
                 clearInterval(talkinnterval);
                 blinking();
             }, Math.floor(Math.random() * (4000 - 1500 + 1) + 1500))
-        }
-        else if (input == "how are you?" || input == "how's things?" || input == "How's it rockin?") {
+        } else if (input == "how are you?" || input == "how's things?" || input == "How's it rockin?") {
             lastresponse = "";
             var outputs = ["im well, how about you", "I am good, how about you", "pretty great, how about you", "I am operating and full capacity"];
             var output = outputs[Math.floor((Math.random() * outputs.length))];
@@ -179,8 +178,7 @@ function bot() {
                 /*make this the last response */
                 lastresponse = "how are you?";
             }, Math.floor(Math.random() * (4000 - 1500 + 1) + 1500));
-        }
-        else if (input == "wattup" || input == "what's up" || input == "whats up" || input == "watcha doing" || input == "what are you doing") {
+        } else if (input == "wattup" || input == "what's up" || input == "whats up" || input == "watcha doing" || input == "what are you doing") {
             lastresponse = "";
             var outputs = ["nothing much, how about you?", "not much, how about you", "just chillin and being an incredible chat bot"];
             var output = outputs[Math.floor((Math.random() * outputs.length))];
@@ -195,8 +193,7 @@ function bot() {
                 clearInterval(talkinnterval);
                 blinking();
             }, Math.floor(Math.random() * (4000 - 1500 + 1) + 1500))
-        }
-        else if (input == "what is the weather like?" || input == "how's the weather?" || input == "what is the weather?" || input == "whats the weather?" || input == "what's the weather?" || input == "how is the weather?" || input == "what's the weather like") {
+        } else if (input == "what is the weather like?" || input == "how's the weather?" || input == "what is the weather?" || input == "whats the weather?" || input == "what's the weather?" || input == "how is the weather?" || input == "what's the weather like") {
             lastresponse = "";
             var outputs = ["Sunny", "Windy", "I dunno, what does it look like to you?"];
             var output = outputs[Math.floor((Math.random() * outputs.length))];
@@ -211,8 +208,7 @@ function bot() {
                 clearInterval(talkinnterval);
                 blinking();
             }, Math.floor(Math.random() * (4000 - 1500 + 1) + 1500))
-        }
-        else if (input == "what are you?" || input == "who are you?") {
+        } else if (input == "what are you?" || input == "who are you?") {
             lastresponse = "what are you";
             var outputs = ["I am a pretty good chatbot in making! What are you?"];
             var output = outputs[Math.floor((Math.random() * outputs.length))];
@@ -244,12 +240,33 @@ function bot() {
             };
             if (input.substring(9) in knownThings) {
                 phrase([knownThings[input.substring(9)]], "")
-            }
-            else {
+            } else {
                 phrase(["I do not know what " + input.substring(9) + " are"]);
             }
-        }
-        else if (input.slice(-1) == '?') {
+
+        } else if (input.substring(0, 7) == "why are") {
+            if (input.slice(-1) == '?') {
+                input = input.substring(0, input.length - 1);
+            }
+            inputList = input.split(" ");
+            subject = String(inputList[2]);
+            object = String(inputList[3]);
+
+            var cats = {
+                  fluffy: "Evolution caused them to have fluff to keep them warm",
+                  cute: "Because society has learnt to see these small fluffy creatures as cute",
+              }
+            var crocodiles = {
+                  angry: "They aren't actually angry. They just look angry. They are actually pretty cool",
+                  scary: "Because they can drag you under the water and murder you :-)"
+              }
+
+
+            output = (eval(subject + "[object]"))
+            phrase([output], "")
+
+
+        } else if (input.slice(-1) == '?') {
             var outputs = ["I don't know...", "I don't understand the question", "I'm not sure", "i don't know about that", "My master said I cannot answer this question"];
             var output = outputs[Math.floor((Math.random() * outputs.length))];
             /*vvv decides what the bot should look like when talking  vvv*/
@@ -264,32 +281,10 @@ function bot() {
                 blinking();
             }, Math.floor(Math.random() * (4000 - 1500 + 1) + 1500))
         } //this one must go last
-        else if (input.substring(0,7) == "why are") {
-          inputList = input.split(" ");
-          subject = inputList[2]
-          object = inputList[3]
-
-          knownSubjects = {
-            'cats': {
-              "green" : 'They arent',
-              "blue" : 'they are blue',
-            }
-          }
-
-          if (subject in knownSubjects){
-            if (object in knownSubjects[subject]){
-                phrase([subject + " are " + object + " because " + subject[object]], "")
-                console.log(subject, object)
-                console.log(subject[object.string])
-            }
-          }
-
-        }
         else {
             clearInterval(talkinnterval);
             clearInterval(blinkInterval);
             blinking();
-            console.log(lastresponse);
         }
 
         /* this bit handles responses to specific quesitons */
@@ -309,8 +304,7 @@ function bot() {
                 /*removes the last response */
                 lastresponse = "";
             }, Math.floor(Math.random() * (4000 - 1500 + 1) + 1500))
-        }
-        else if (lastresponse == "what's up" || lastresponse == "what are you?") {
+        } else if (lastresponse == "what's up" || lastresponse == "what are you?") {
             var outputs = ["that's good to hear", "really? that sounds cool!", "oh, tell me more.", "can you elaborate"];
             var output = outputs[Math.floor((Math.random() * outputs.length))];
             /*vvv decides what the bot should look like when talking  vvv*/
@@ -326,8 +320,7 @@ function bot() {
                 /*removes the last response */
                 lastresponse = "";
             }, Math.floor(Math.random() * (4000 - 1500 + 1) + 1500))
-        }
-        else if (lastresponse == "idleQuestion") {
+        } else if (lastresponse == "idleQuestion") {
             var outputs = ["ooh! tell me more", "really?", "can you elaborate", "that is very interesting, tell me more"];
             var output = outputs[Math.floor((Math.random() * outputs.length))];
             /*vvv decides what the bot should look like when talking  vvv*/
@@ -344,6 +337,7 @@ function bot() {
                 lastresponse = "idleQuestion";
             }, Math.floor(Math.random() * (4000 - 1500 + 1) + 1500))
         }
+
         else {
 
         };
