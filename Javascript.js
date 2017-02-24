@@ -1,6 +1,25 @@
 /* face= "'o_o'";
    blink = "⇀_↼"
 */
+
+/*
+  What it can do;
+    - It can say hello;
+    - It will remember your name
+    - ask it "What are cats?"
+    - ask it "Why are cats fluffy?"
+    - it also knows why crocodiles are angry and scary.
+    - Wait for 30 seconds
+    - ask it how it is
+
+  Bugs n' stuff;
+    - If you give it multiple input at once it can get confused and glitch output
+    - If you give an input as your name then it gets confused as well
+*/
+/*
+  I took a slightly different approach to making it seem more human. I decided to
+  give it a face that would reflect its current emotion and whether it was talking or not.
+*/
 var count = 0;
 var initial = true;
 var name = null;
