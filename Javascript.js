@@ -11,6 +11,7 @@
     - it also knows why crocodiles are angry and scary.
     - Wait for 30 seconds
     - ask it how it is
+    -[just for fun] try typing 'more rgb'
 
   Bugs n' stuff;
     - If you give it multiple input at once it can get confused and glitch output
